@@ -2,15 +2,15 @@ import React from 'react';
 import { Nostalgist } from 'nostalgist';
 import '../App.css';
 
-const GameLauncher: React.FC = () => {
+const SnesGameLauncher: React.FC = () => {
     const launchGame = async () => {
         try {
-            const response = await fetch('/roms/FF1.nes');
+            const response = await fetch('/roms/SPO.sfc');
             const romData = await response.blob();
             
-            await Nostalgist.nes({
+            await Nostalgist.snes({
                 fileContent: romData,
-                fileName: 'FF1.nes',
+                fileName: 'SPO.sfc',
                
             });
         } catch (error) {
@@ -36,4 +36,4 @@ const GameLauncher: React.FC = () => {
     );
 };
 
-export default GameLauncher;
+export default SnesGameLauncher;
