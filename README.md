@@ -16,9 +16,11 @@ if you find how to change cores, cool! let me know.
 
 THERE IS CONTROLLER SUPPORT - it should work for all controllers, i used a ps5 controller through USB connection for testing.
 
-EDIT: i didnt realize keyboard controls got messed up, sorry! i'll try to add a legend  saying what keys are what!
+~~EDIT: i didnt realize keyboard controls got messed up, sorry! i'll try to add a legend  saying what keys are what!~~ FIXED AND ADDED
 
 if you find ways to improve this, let me know!
 
 Nostalgist.js is amazing! it's documentation is 10/10
 https://nostalgist.js.org/
+
+UPDATE: i plan on trying out the Sega Genesis stuff in the documentation, look forward to that!
