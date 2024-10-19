@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Nostalgist } from 'nostalgist';
 import '../App.css';
 
-const GameLauncher: React.FC = () => {
+const GbGameLauncherWithSaveStates: React.FC = () => {
     const [emulatorInstance, setEmulatorInstance] = useState<any>(null);
     const [saveStates, setSaveStates] = useState<{ state: Blob, thumbnail?: Blob }[]>([]);
     const [error, setError] = useState<string>('');
@@ -10,7 +10,7 @@ const GameLauncher: React.FC = () => {
 
     useEffect(() => {
         try {
-            const savedStates = localStorage.getItem('nesGameSaveStates');
+            const savedStates = localStorage.getItem('gbGameSaveStates');
             if (savedStates) {
                 const parsedStates = JSON.parse(savedStates);
                 const reconstructedStates = parsedStates.map((state: { state: string, thumbnail?: string }) => ({
@@ -52,12 +52,12 @@ const GameLauncher: React.FC = () => {
 
     const launchGame = async () => {
         try {
-            const response = await fetch('/roms/FF1.nes');
+            const response = await fetch('/roms/PKMNR.gb');
             const romData = await response.blob();
             
-            const nostalgist = await Nostalgist.nes({
+            const nostalgist = await Nostalgist.gb({
                 fileContent: romData,
-                fileName: 'FF1.nes'
+                fileName: 'PKMNR.gb'
             });
     
             nostalgist.resize({ width: 512, height: 480 });
@@ -76,10 +76,83 @@ const GameLauncher: React.FC = () => {
             }
     
             setEmulatorInstance(nostalgist);
+            setupControllerSupport(nostalgist); // Set up controller support after launching the game
         } catch (error) {
             console.error("Error launching game:", error);
             setError(`Failed to launch game: ${error instanceof Error ? error.message : 'Unknown error'}`);
         }
+    };
+
+    const setupControllerSupport = (nostalgist: any) => {
+        const handleKeyDown = (event: KeyboardEvent) => {
+            switch (event.key) {
+                case 'ArrowUp':
+                    nostalgist.pressDown('up');
+                    break;
+                case 'ArrowDown':
+                    nostalgist.pressDown('down');
+                    break;
+                case 'ArrowLeft':
+                    nostalgist.pressDown('left');
+                    break;
+                case 'ArrowRight':
+                    nostalgist.pressDown('right');
+                    break;
+                case 'Enter':
+                    nostalgist.pressDown('start');
+                    break;
+                case 'Backspace':
+                    nostalgist.pressDown('select');
+                    break;
+                case 'z': // Map 'z' to 'a' button
+                    nostalgist.pressDown('a');
+                    break;
+                case 'x': // Map 'x' to 'b' button
+                    nostalgist.pressDown('b');
+                    break;
+                default:
+                    break;
+            }
+        };
+
+        const handleKeyUp = (event: KeyboardEvent) => {
+            switch (event.key) {
+                case 'ArrowUp':
+                    nostalgist.pressUp('up');
+                    break;
+                case 'ArrowDown':
+                    nostalgist.pressUp('down');
+                    break;
+                case 'ArrowLeft':
+                    nostalgist.pressUp('left');
+                    break;
+                case 'ArrowRight':
+                    nostalgist.pressUp('right');
+                    break;
+                case 'Enter':
+                    nostalgist.pressUp('start');
+                    break;
+                case 'Backspace':
+                    nostalgist.pressUp('select');
+                    break;
+                case 'z': // Map 'z' to 'a' button
+                    nostalgist.pressUp('a');
+                    break;
+                case 'x': // Map 'x' to 'b' button
+                    nostalgist.pressUp('b');
+                    break;
+                default:
+                    break;
+            }
+        };
+
+        window.addEventListener('keydown', handleKeyDown);
+        window.addEventListener('keyup', handleKeyUp);
+
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown);
+            window.removeEventListener('keyup', handleKeyUp);
+        };
     };
 
     const handleSaveState = async () => {
@@ -104,7 +177,7 @@ const GameLauncher: React.FC = () => {
                 }))
             );
             
-            localStorage.setItem('nesGameSaveStates', JSON.stringify(statesForStorage));
+            localStorage.setItem('gbGameSaveStates', JSON.stringify(statesForStorage));
             console.log('State saved successfully!');
         } catch (error) {
             console.error("Error saving state:", error);
@@ -154,7 +227,7 @@ const GameLauncher: React.FC = () => {
     return (
         <div className="game-launcher-page">
             <div className="controls-container">
-                <h2 className="text-xl font-bold mb-4">Launch Final Fantasy</h2>
+                <h2 className="text-xl font-bold mb-4">Launch Pokemon Red Version</h2>
     
                 <div className="flex gap-2 mb-4">
                     <button 
@@ -243,4 +316,4 @@ const GameLauncher: React.FC = () => {
     );
 };
 
-export default GameLauncher;
+export default GbGameLauncherWithSaveStates;
