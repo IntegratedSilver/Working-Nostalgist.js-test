@@ -1,6 +1,6 @@
-if you want to test the other emulators, comment out the current one then uncomment out the one you want to use
+if you want to test the other emulators, comment out the current one then uncomment out the one you want to use in the app.tsx
 
-to put in your own rom, you need to put your own rom into the folder, look for the file name in the code (strings that have the file name and either .sfc, .gb, .gbc, or .nes)
+to put in your own rom, you need to put your own rom into the folder, look for the file name in the coresponding component .tsx code (strings that have the file name and either .sfc, .gb, .gbc, or .nes)
 
 save state will not work without changing the savestate string for local storage
 example: const savedStates = localStorage.getItem('gbGameSaveStates');
