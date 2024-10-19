@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Nostalgist } from 'nostalgist';
 import '../App.css';
 
-const GameLauncher: React.FC = () => {
+const SnesGameLauncherWithSaveStates: React.FC = () => {
     const [emulatorInstance, setEmulatorInstance] = useState<any>(null);
     const [saveStates, setSaveStates] = useState<{ state: Blob, thumbnail?: Blob }[]>([]);
     const [error, setError] = useState<string>('');
@@ -98,23 +98,29 @@ const GameLauncher: React.FC = () => {
                 case 'ArrowRight':
                     nostalgist.pressDown('right');
                     break;
-                case 'Enter':
-                    nostalgist.pressDown('start');
+                case 'z': // Map 'Z' key to the NES 'B' button
+                    nostalgist.pressDown('b');
                     break;
-                case 'Backspace':
-                    nostalgist.pressDown('select');
-                    break;
-                case 'z': // Map 'z' to 'a' button
+                case 'x': // Map 'X' key to the NES 'A' button
                     nostalgist.pressDown('a');
                     break;
-                case 'x': // Map 'x' to 'b' button
-                    nostalgist.pressDown('b');
+                case 'a': // Map 'A' key to the NES 'Y' button
+                    nostalgist.pressDown('y');
+                    break;
+                case 's': // Map 'S' key to the NES 'X' button
+                    nostalgist.pressDown('x');
+                    break;
+                case 'd': // Map 'D' key to the NES 'Select' button
+                    nostalgist.pressDown('select');
+                    break;
+                case 'c': // Map 'C' key to the NES 'Start' button
+                    nostalgist.pressDown('start');
                     break;
                 default:
                     break;
             }
         };
-
+    
         const handleKeyUp = (event: KeyboardEvent) => {
             switch (event.key) {
                 case 'ArrowUp':
@@ -129,26 +135,34 @@ const GameLauncher: React.FC = () => {
                 case 'ArrowRight':
                     nostalgist.pressUp('right');
                     break;
-                case 'Enter':
-                    nostalgist.pressUp('start');
+                case 'z': // Release the NES 'B' button
+                    nostalgist.pressUp('b');
                     break;
-                case 'Backspace':
-                    nostalgist.pressUp('select');
-                    break;
-                case 'z': // Map 'z' to 'a' button
+                case 'x': // Release the NES 'A' button
                     nostalgist.pressUp('a');
                     break;
-                case 'x': // Map 'x' to 'b' button
-                    nostalgist.pressUp('b');
+                case 'a': // Release the NES 'Y' button
+                    nostalgist.pressUp('y');
+                    break;
+                case 's': // Release the NES 'X' button
+                    nostalgist.pressUp('x');
+                    break;
+                case 'd': // Release the NES 'Select' button
+                    nostalgist.pressUp('select');
+                    break;
+                case 'c': // Release the NES 'Start' button
+                    nostalgist.pressUp('start');
                     break;
                 default:
                     break;
             }
         };
-
+    
+        // Add event listeners for keydown and keyup events
         window.addEventListener('keydown', handleKeyDown);
         window.addEventListener('keyup', handleKeyUp);
-
+    
+        // Clean up event listeners when component unmounts
         return () => {
             window.removeEventListener('keydown', handleKeyDown);
             window.removeEventListener('keyup', handleKeyUp);
@@ -311,9 +325,23 @@ const GameLauncher: React.FC = () => {
                 )}
             </div>
     
-            <div id="emulator-container" className="emulator-container" />
+            <div id="emulator-container" className="emulator-container"></div>
+
+            <div className="key-legend mt-4">
+            <h3 className="text-lg font-bold">You can use a controller too!</h3>
+                <h3 className="text-lg font-bold">Keyboard Controls:</h3>
+                <ul className="list-disc list-inside">
+                    <li><strong>Arrow Keys</strong> - Move</li>
+                    <li><strong>Z</strong> - B Button</li>
+                    <li><strong>X</strong> - A Button</li>
+                    <li><strong>A</strong> - Y Button</li>
+                    <li><strong>S</strong> - X Button</li>
+                    <li><strong>D</strong> - Select</li>
+                    <li><strong>C</strong> - Start</li>
+                </ul>
+            </div>
         </div>
     );
 };
 
-export default GameLauncher;
+export default SnesGameLauncherWithSaveStates;

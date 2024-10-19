@@ -14,9 +14,10 @@ const App: React.FC = () => {
             <h1>Nostalgist.js Retro Game Launcher</h1>
             {/* <GameLauncher /> */}
             {/* <SnesGameLauncher/> */}
-                <NesGameLauncherWithSaveStates/>
+
+            {/* <NesGameLauncherWithSaveStates/> */}
             {/* <SnesGameLauncherWithSaveStates/> */}
-            {/* <GbcGameLauncherWithSaveStates/> */}
+            <GbcGameLauncherWithSaveStates/>
             {/* <GbGameLauncherWithSaveStates/> */}
         </div>
     );

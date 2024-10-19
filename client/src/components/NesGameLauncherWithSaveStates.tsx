@@ -98,23 +98,23 @@ const NesGameLauncherWithSaveStates: React.FC = () => {
                 case 'ArrowRight':
                     nostalgist.pressDown('right');
                     break;
-                case 'Enter':
-                    nostalgist.pressDown('start');
-                    break;
-                case 'Backspace':
-                    nostalgist.pressDown('select');
-                    break;
-                case 'z': // Map 'z' to 'a' button
+                case 'x': // Map 'X' key to the NES 'A' button
                     nostalgist.pressDown('a');
                     break;
-                case 'x': // Map 'x' to 'b' button
+                case 'z': // Map 'Z' key to the NES 'B' button
                     nostalgist.pressDown('b');
+                    break;
+                case 's': // Map 'S' key to the NES 'Start' button
+                    nostalgist.pressDown('start');
+                    break;
+                case 'a': // Map 'A' key to the NES 'Select' button
+                    nostalgist.pressDown('select');
                     break;
                 default:
                     break;
             }
         };
-
+    
         const handleKeyUp = (event: KeyboardEvent) => {
             switch (event.key) {
                 case 'ArrowUp':
@@ -129,26 +129,28 @@ const NesGameLauncherWithSaveStates: React.FC = () => {
                 case 'ArrowRight':
                     nostalgist.pressUp('right');
                     break;
-                case 'Enter':
-                    nostalgist.pressUp('start');
-                    break;
-                case 'Backspace':
-                    nostalgist.pressUp('select');
-                    break;
-                case 'z': // Map 'z' to 'a' button
+                case 'x': // Release the NES 'A' button
                     nostalgist.pressUp('a');
                     break;
-                case 'x': // Map 'x' to 'b' button
+                case 'z': // Release the NES 'B' button
                     nostalgist.pressUp('b');
+                    break;
+                case 's': // Release the NES 'Start' button
+                    nostalgist.pressUp('start');
+                    break;
+                case 'a': // Release the NES 'Select' button
+                    nostalgist.pressUp('select');
                     break;
                 default:
                     break;
             }
         };
-
+    
+        // Add event listeners for keydown and keyup events
         window.addEventListener('keydown', handleKeyDown);
         window.addEventListener('keyup', handleKeyUp);
-
+    
+        // Clean up event listeners when component unmounts
         return () => {
             window.removeEventListener('keydown', handleKeyDown);
             window.removeEventListener('keyup', handleKeyUp);
@@ -311,7 +313,19 @@ const NesGameLauncherWithSaveStates: React.FC = () => {
                 )}
             </div>
     
-            <div id="emulator-container" className="emulator-container" />
+            <div id="emulator-container" className="emulator-container"></div>
+
+            <div className="key-legend mt-4">
+            <h3 className="text-lg font-bold">You can use a controller too!</h3>
+                <h3 className="text-lg font-bold">Keyboard Controls:</h3>
+                <ul className="list-disc list-inside">
+                    <li><strong>Arrow Keys</strong> - Move</li>
+                    <li><strong>Z</strong> - B Button</li>
+                    <li><strong>X</strong> - A Button</li>
+                    <li><strong>A</strong> - Select</li>
+                    <li><strong>S</strong> - Start</li>
+                </ul>
+            </div>
         </div>
     );
 };

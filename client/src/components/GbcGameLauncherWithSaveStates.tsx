@@ -98,23 +98,23 @@ const GbcGameLauncherWithSaveStates: React.FC = () => {
                 case 'ArrowRight':
                     nostalgist.pressDown('right');
                     break;
-                case 'Enter':
-                    nostalgist.pressDown('start');
-                    break;
-                case 'Backspace':
-                    nostalgist.pressDown('select');
-                    break;
-                case 'z': // Map 'z' to 'a' button
+                case 'x': // Map 'X' key to the GBC 'A' button
                     nostalgist.pressDown('a');
                     break;
-                case 'x': // Map 'x' to 'b' button
+                case 'z': // Map 'Z' key to the GBC 'B' button
                     nostalgist.pressDown('b');
+                    break;
+                case 's': // Map 'S' key to the GBC 'Start' button
+                    nostalgist.pressDown('start');
+                    break;
+                case 'a': // Map 'A' key to the GBC 'Select' button
+                    nostalgist.pressDown('select');
                     break;
                 default:
                     break;
             }
         };
-
+    
         const handleKeyUp = (event: KeyboardEvent) => {
             switch (event.key) {
                 case 'ArrowUp':
@@ -129,32 +129,33 @@ const GbcGameLauncherWithSaveStates: React.FC = () => {
                 case 'ArrowRight':
                     nostalgist.pressUp('right');
                     break;
-                case 'Enter':
-                    nostalgist.pressUp('start');
-                    break;
-                case 'Backspace':
-                    nostalgist.pressUp('select');
-                    break;
-                case 'z': // Map 'z' to 'a' button
+                case 'x': // Release the GBC 'A' button
                     nostalgist.pressUp('a');
                     break;
-                case 'x': // Map 'x' to 'b' button
+                case 'z': // Release the GBC 'B' button
                     nostalgist.pressUp('b');
+                    break;
+                case 's': // Release the GBC 'Start' button
+                    nostalgist.pressUp('start');
+                    break;
+                case 'a': // Release the GBC 'Select' button
+                    nostalgist.pressUp('select');
                     break;
                 default:
                     break;
             }
         };
-
+    
+        // Add event listeners for keydown and keyup events
         window.addEventListener('keydown', handleKeyDown);
         window.addEventListener('keyup', handleKeyUp);
-
+    
+        // Clean up event listeners when component unmounts
         return () => {
             window.removeEventListener('keydown', handleKeyDown);
             window.removeEventListener('keyup', handleKeyUp);
         };
     };
-
     const handleSaveState = async () => {
         if (!emulatorInstance) {
             setError('Game must be running to save state');
@@ -267,7 +268,7 @@ const GbcGameLauncherWithSaveStates: React.FC = () => {
                         className={`px-4 py-2 rounded ${
                             emulatorInstance 
                                 ? 'bg-red-500 hover:bg-red-600 text-white' 
-                                : 'bg-gray-300 cursor-not-allowed'
+                                : 'bg-gray-                                cursor-not-allowed'
                         }`}
                     >
                         Reset Game
@@ -312,8 +313,26 @@ const GbcGameLauncherWithSaveStates: React.FC = () => {
             </div>
     
             <div id="emulator-container" className="emulator-container" />
+
+            {/* Keyboard Controls Legend */}
+            <div className="controls-legend mt-6">
+            <h3 className="text-lg font-bold">You can use a controller too!</h3>
+                <h3 className="text-lg font-bold mb-2">Keyboard Controls:</h3>
+                <ul className="list-disc pl-5">
+                    <li><strong>Arrow Up:</strong> Move Up</li>
+                    <li><strong>Arrow Down:</strong> Move Down</li>
+                    <li><strong>Arrow Left:</strong> Move Left</li>
+                    <li><strong>Arrow Right:</strong> Move Right</li>
+                    <li><strong>X:</strong> A Button</li>
+                    <li><strong>Z:</strong> B Button</li>
+                    <li><strong>S:</strong> Start Button</li>
+                    <li><strong>A:</strong> Select Button</li>
+                </ul>
+            </div>
         </div>
     );
 };
 
 export default GbcGameLauncherWithSaveStates;
+
+                                
