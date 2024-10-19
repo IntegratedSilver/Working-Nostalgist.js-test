@@ -15,6 +15,7 @@ i'll mess around with the emulator cores at some point. the GB emulator runs off
 if you find how to change cores, cool! let me know.
 
 THERE IS CONTROLLER SUPPORT - it should work for all controllers, i used a ps5 controller through USB connection for testing
+EDIT: i didnt realize keyboard controls got messed up, sorry! i'll try to add a legend  saying what keys are what!
 
 if you find ways to improve this, let me know!
 
