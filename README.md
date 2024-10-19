@@ -23,4 +23,4 @@ if you find ways to improve this, let me know!
 Nostalgist.js is amazing! it's documentation is 10/10
 https://nostalgist.js.org/
 
-UPDATE: i plan on trying out the Sega Genesis in the documentation, look forward to that!
+UPDATE: i plan on trying out the Sega Genesis stuff in the documentation, look forward to that!
