@@ -15,6 +15,8 @@ const App: React.FC = () => {
             {/* <GameLauncher /> */}
             {/* <SnesGameLauncher/> */}
 
+            {/* the ones above this line were earlier versions, the one below are the decked out built ones */}
+            
             {/* <NesGameLauncherWithSaveStates/> */}
             {/* <SnesGameLauncherWithSaveStates/> */}
             <GbcGameLauncherWithSaveStates/>
