@@ -7,6 +7,7 @@ import SnesGameLauncherWithSaveStates from './components/SnesGameLauncherWithSav
 import GbcGameLauncherWithSaveStates from './components/GbcGameLauncherWithSaveStates';
 import GbGameLauncherWithSaveStates from './components/GbGameLauncherWithSaveStates';
 import NesGameLauncherWithSaveStates from './components/NesGameLauncherWithSaveStates';
+import GbaGameLauncherWithSaveStates from './components/GbaGameLauncherWithSaveStates';
 
 const App: React.FC = () => {
     return (
@@ -19,8 +20,9 @@ const App: React.FC = () => {
             
             {/* <NesGameLauncherWithSaveStates/> */}
             {/* <SnesGameLauncherWithSaveStates/> */}
-            <GbcGameLauncherWithSaveStates/>
+            {/* <GbcGameLauncherWithSaveStates/> */}
             {/* <GbGameLauncherWithSaveStates/> */}
+            <GbaGameLauncherWithSaveStates/>
         </div>
     );
 };
